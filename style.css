@@ -2,7 +2,8 @@ body{
     margin: 0;
     padding: 0;
     font-family: sans-serif;
-    background: #34495e;
+    background-image: url(img/fondo.jpg);
+    background-size: cover;
 }
 
 .box{
@@ -12,7 +13,7 @@ body{
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
-    background: #191919;
+    background: linear-gradient(to right bottom, rgba(25, 25, 25, 0.8),rgba(25, 25, 25, 0.6));
     text-align: center;
     border-radius: 20px;
 }
