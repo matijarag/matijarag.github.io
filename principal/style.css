@@ -369,7 +369,7 @@ button{
     color: var(--main-color);
     opacity: 1;
     cursor: auto;
-
+    
 }
 
 .about-text .timeline{
@@ -393,6 +393,7 @@ button{
 
 .about-text .tab-content.active{
     display: block;
+    animation: fadeIn 0.5s ease-in-out forwards;
 }
 
 .about-text .timeline-item{
