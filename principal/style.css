@@ -1,7 +1,6 @@
 /*FUENTES DE TEXTO*/
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;1,300&display=swap');
 
-
 /* VARIABLES */
 
 :root {
@@ -32,6 +31,13 @@
 ::after {
     box-sizing: border-box;
 }
+
+hr.dashed {
+    border-top: 2px dashed var(--main-color);
+    border-radius: none;
+    border-bottom: none;
+    margin-bottom: 1.875rem;
+  }
 
 body{
     min-height: 100vh;
@@ -266,8 +272,35 @@ button{
     border-radius: 10px;
 }
 .about-img .img-box img{
-    width: 100%;
+    max-width: 100%;
 }
+.about-img .img-box .imagen-about {
+    max-width: 80%;
+    margin: 30px;
+}
+.about-img .img-box .info-item{
+    display: flex;
+    align-items: center;
+
+}
+.about-img .img-box .info-item img{
+    width: 15%;
+    padding: 0.625rem;
+}
+.about-img .img-box .info-item p{
+    width: 85%;
+    padding: 0.625rem;
+}
+.about-img .img-box .info-item a{
+    width: 85%;
+    padding: 0.625rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.about-img .img-box .info-item a:hover{
+    color: var(--main-color);
+}
+
 .about-text h3{
     text-transform: capitalize;
     font-size: 1.25rem;

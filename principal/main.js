@@ -11,6 +11,7 @@ window.onload = function () {
     document.getElementById('nombreInvitado').innerHTML = data.nombreUsu.replace(/[+]/,' ');
 }
 
+
 /* BOTON SABER MAS */
 const btnSaberMas = document.querySelector(".sobre-mi");
 btnSaberMas.addEventListener("click", () =>{
