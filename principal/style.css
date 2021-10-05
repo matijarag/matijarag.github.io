@@ -485,12 +485,13 @@ button{
     opacity: 0;
 }
 .bubbles{
-    width: 100%;
+    width: 90%;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
+    align-content: center;
     position: absolute;
-    bottom: -40px;
+    bottom: -80px;
 }
 
 @keyframes bubble {
