@@ -2,84 +2,15 @@
 import React, { useTransition, useState } from "react";
 import Image from "next/image";
 import TabButton from "./TabButton";
-import AboutImage from "/public/kittler.png";
-
-const TAB_DATA = [
-  {
-    title: "Data",
-    id: "data",
-    content: (
-      <div className="skills-container">
-        <ul className="list-disc pl-2">
-          <li>Google Big Query</li>
-          <li>Google Cloud Platform</li>
-          <li>Git Pipelines</li>
-          <li>Apache Airflow</li>
-          <li>DBT</li>
-        </ul>
-        <ul className="list-disc pl-2">
-          <li>SQL Avanzado</li>
-          <li>Oracle BI Publisher</li>
-          <li>PowerBI</li>
-          <li>Oracle Unifier</li>
-          <li>SharePoint</li>
-        </ul>
-      </div>
-    ),
-  },
-  {
-    title: "Programming",
-    id: "programming",
-    content: (
-      <div className="skills-container">
-        <ul className="list-disc pl-2">
-          <li>Java</li>
-          <li>Javascript</li>
-          <li>Python</li>
-          <li>Batch</li>
-          <li>C#</li>
-          <li>PHP</li>
-        </ul>
-        <ul className="list-disc pl-2">
-          <li>Oracle PLSQL</li>
-          <li>Transact SQL</li>
-          <li>Docker</li>
-          <li>Kubernetes</li>
-          <li>Power Apps</li>
-          <li>Power Automate</li>
-        </ul>
-      </div>
-    ),
-  },
-  {
-    title: "Educacion",
-    id: "education",
-    content: (
-      <ul className="list-disc pl-2">
-        <li>GitLab CI/CD|Docker|Kubernetes|Microservices - TechWorld with Nana</li>
-        <li>Ingeniería en informática - Duoc Uc</li>
-        <li>Preparador Físico - Duoc Uc</li>
-        <li>Instituto San Pablo Misionero</li>
-      </ul>
-    ),
-  },
-  {
-    title: "Premios/Certificaciones",
-    id: "certifications",
-    content: (
-      <ul className="list-disc pl-2">
-        <li>Oracle construction and engineering excellence awards 2019</li>
-        <li>Oracle Partner del año 2020</li>
-        <li>Aconex Certified Associate 2019-2020</li>
-        <li>RPA Developer 2018-2020</li>
-      </ul>
-    ),
-  },
-];
+import AboutImage from "/public/programmercat.jpg";
+import { useLanguage } from "../context/LanguageContext";
+import { translations } from "../translations";
 
 const AboutSection = () => {
   const [tab, setTab] = useState("data");
   const [isPending, startTransition] = useTransition();
+  const { language } = useLanguage();
+  const t = translations[language];
 
   const handleTabChange = (id) => {
     startTransition(() => {
@@ -87,16 +18,75 @@ const AboutSection = () => {
     });
   };
 
+  const TAB_DATA = [
+    {
+      title: t.about.tabs.data,
+      id: "data",
+      content: (
+        <div className="skills-container">
+          <ul className="list-disc pl-2">
+            {t.about.skills.data.slice(0, 5).map((skill, index) => (
+              <li key={index}>{skill}</li>
+            ))}
+          </ul>
+          <ul className="list-disc pl-2">
+            {t.about.skills.data.slice(5).map((skill, index) => (
+              <li key={index}>{skill}</li>
+            ))}
+          </ul>
+        </div>
+      ),
+    },
+    {
+      title: t.about.tabs.programming,
+      id: "programming",
+      content: (
+        <div className="skills-container">
+          <ul className="list-disc pl-2">
+            {t.about.skills.programming.slice(0, 6).map((skill, index) => (
+              <li key={index}>{skill}</li>
+            ))}
+          </ul>
+          <ul className="list-disc pl-2">
+            {t.about.skills.programming.slice(6).map((skill, index) => (
+              <li key={index}>{skill}</li>
+            ))}
+          </ul>
+        </div>
+      ),
+    },
+    {
+      title: t.about.tabs.education,
+      id: "education",
+      content: (
+        <ul className="list-disc pl-2">
+          {t.about.education.map((item, index) => (
+            <li key={index}>{item}</li>
+          ))}
+        </ul>
+      ),
+    },
+    {
+      title: t.about.tabs.certifications,
+      id: "certifications",
+      content: (
+        <ul className="list-disc pl-2">
+          {t.about.awards.map((item, index) => (
+            <li key={index}>{item}</li>
+          ))}
+        </ul>
+      ),
+    },
+  ];
+
   return (
     <section className="text-white" id="about">
       <div className="md:grid md:grid-cols-2 gap-8 items-center py-8 px-4 xl:gap-16 sm:py-16 xl:px-16">
-        <Image src={AboutImage} width={500} height={500} />
+        <Image src={AboutImage} width={500} height={500} alt="About Me" />
         <div className="mt-4 md:mt-0 text-left flex flex-col h-full">
-          <h2 className="text-4xl font-bold text-white mb-4">Sobre mí</h2>
+          <h2 className="text-4xl font-bold text-white mb-4">{t.about.title}</h2>
           <p className="text-base lg:text-lg">
-          Apasionado por el análisis e ingeniería de datos, busco desarrollar mis competencias profesionales en una empresa donde pueda ampliar y potenciar las habilidades adquiridas a lo largo de mis estudios, en cursos en línea y en el mundo laboral.
-          Poseo una sólida capacidad para trabajar bajo presión, tomar decisiones de alto nivel, analizar, desarrollar y optimizar procesos sobre sistemas ya existentes. Destaco en la resolución de problemas, el autoaprendizaje y la transparencia.
-          Mi orientación está enfocada a alcanzar los logros y resultados que la empresa enfoque durante el año.
+            {t.about.description}
           </p>
           <div className="flex flex-row justify-start mt-8">
             <TabButton
@@ -104,21 +94,21 @@ const AboutSection = () => {
               active={tab === "data"}
             >
               {" "}
-              Data{" "}
+              {t.about.tabs.data}{" "}
             </TabButton>
             <TabButton
               selectTab={() => handleTabChange("programming")}
               active={tab === "programming"}
             >
               {" "}
-              Programación{" "}
+              {t.about.tabs.programming}{" "}
             </TabButton>
             <TabButton
               selectTab={() => handleTabChange("education")}
               active={tab === "education"}
             >
               {" "}
-              Educación{" "}
+              {t.about.tabs.education}{" "}
             </TabButton>
           </div>
           <div className="mt-8">

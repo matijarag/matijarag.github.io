@@ -5,8 +5,26 @@ import { TypeAnimation } from "react-type-animation";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import CatPc from "/public/catpc.png";
+import { useLanguage } from "../context/LanguageContext";
+import { translations } from "../translations";
 
 const HeroSection = () => {
+  const { language } = useLanguage();
+  const t = translations[language];
+
+  const handleDownloadCV = () => {
+    const cvPath = language === "es"
+      ? "/Matias Jara Cv ES.pdf"
+      : "/Matias Jara Cv EN.pdf";
+
+    const link = document.createElement("a");
+    link.href = cvPath;
+    link.download = `Matias_Jara_CV_${language.toUpperCase()}.pdf`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <section className="lg:py-16">
       <div className="grid grid-cols-1 sm:grid-cols-12">
@@ -18,16 +36,16 @@ const HeroSection = () => {
         >
           <h1 className="text-white mb-4 text-4xl sm:text-5xl lg:text-6xl lg:leading-normal font-extrabold">
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-secondary-600">
-              Hola, soy Matías{" "}
+              {t.hero.greeting}{" "}
             </span>
             <br></br>
             <TypeAnimation
               sequence={[
-                "Software Engineer",
+                t.hero.roles[0],
                 1000,
-                "Data Engineer",
+                t.hero.roles[1],
                 1000,
-                "Governance Engineer",
+                t.hero.roles[2],
                 1000,
               ]}
               wrapper="span"
@@ -36,17 +54,14 @@ const HeroSection = () => {
             />
           </h1>
           <div>
-
-            <Link
-              href="/"
+            <button
+              onClick={handleDownloadCV}
               className="px-1 inline-block py-1 w-full sm:w-fit rounded-full bg-gradient-to-br from-primary-500 to-secondary-500 hover:bg-slate-800 text-white mt-3"
             >
               <span className="block bg-[#121212] hover:bg-slate-800 rounded-full px-5 py-2">
-                Download CV
+                {t.hero.downloadCV}
               </span>
-
-            </Link>
-
+            </button>
           </div>
         </motion.div>
         <motion.div

@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import dynamic from "next/dynamic";
+import { useLanguage } from "../context/LanguageContext";
 
 const AnimatedNumbers = dynamic(
   () => {
@@ -9,25 +10,26 @@ const AnimatedNumbers = dynamic(
   { ssr: false }
 );
 
-const achievementsList = [
-  {
-    metric: "Carreras",
-    value: "2",
-  },
-  {
-    postfix: "+",
-    metric: "Proyectos Optimizados",
-    value: "50+",
-    
-  },
-  {
-    postfix: "+",
-    metric: "Años de Experiencia",
-    value: "7",
-  },
-];
-
 const AchievementsSection = () => {
+  const { language } = useLanguage();
+
+  const achievementsList = [
+    {
+      metric: language === "es" ? "Carreras" : "Degrees",
+      value: "2",
+    },
+    {
+      postfix: "+",
+      metric: language === "es" ? "Proyectos Optimizados" : "Optimized Projects",
+      value: "50+",
+    },
+    {
+      postfix: "+",
+      metric: language === "es" ? "Años de Experiencia" : "Years of Experience",
+      value: "7",
+    },
+  ];
+
   return (
     <div className="py-8 px-4 xl:gap-16 sm:py-16 xl:px-16">
       <div className="sm:border-[#33353F] sm:border rounded-md py-8 px-16 flex flex-col sm:flex-row items-center justify-between">
